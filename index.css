@@ -1,0 +1,569 @@
+/* ──────────────────────────────────────────────────────────────
+ * GeneSys Clinic Hub — Unified Stylesheet
+ * Single Tailwind / shadcn / design-system entry point.
+ *
+ * Order (per design system contract):
+ *   1. Font import
+ *   2. @tailwind base / components / utilities
+ *   3. Root primitive tokens
+ *   4. Dark-mode primitive overrides
+ *   5. Shadcn HSL tokens (light + dark)
+ *   6. Base resets
+ *   7. Component classes (gs-*)
+ *   8. Scrollbar
+ *   9. Print styles
+ * ────────────────────────────────────────────────────────────── */
+
+/* ─── 1. Font import ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
+
+/* ─── 2. Tailwind directives ─────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── 3. Primitive tokens — Light ────────────────────────────── */
+:root {
+  /* Brand scale */
+  --brand:      #0033A0;
+  --brand-50:   #F2F6FF;
+  --brand-100:  #D9E6FF;
+  --brand-200:  #B3D0FF;
+  --brand-300:  #7FB1FF;
+  --brand-400:  #4D93FF;
+  --brand-500:  #1A77FF;
+  --brand-600:  #005CE6;
+  --brand-700:  #0046B3;
+  --brand-800:  #0033A0;
+  --brand-900:  #00247A;
+
+  /* Accent */
+  --accent-gold:  #DDC196;
+  --accent-teal:  #0EA5A4;
+  --accent-coral: #FF6B4A;
+
+  /* Neutral scale */
+  --neutral-100: #FBFCFF;
+  --neutral-200: #F3F6FB;
+  --neutral-300: #EEF2F7;
+  --neutral-400: #E6EAEE;
+  --neutral-500: #CAD2DF;
+  --neutral-600: #94A0B4;
+  --neutral-700: #374151;
+  --neutral-800: #111827;
+
+  /* Semantic */
+  --success:    #16A34A;
+  --warning:    #F59E0B;
+  --danger:     #DC2626;
+  --info:       #0EA5FF;
+  --color-info: #0EA5FF; /* alias for back-compat */
+
+  /* Surfaces */
+  --bg:              var(--neutral-100);
+  --bg-surface:      var(--neutral-200);
+  --sidebar-bg:      #0033A0;
+  --card-bg:         #FFFFFF;
+  --header-bg:       #FFFFFF;
+
+  /* Brand derivatives */
+  --brand-hover:     var(--brand-700);
+  --brand-light:     var(--brand-300);
+  --brand-tint:      var(--brand-50);
+  --brand-contrast:  #FFFFFF;
+  --brand-soft:      var(--brand-50);
+
+  /* Text */
+  --text-primary:    #0F172A;
+  --text-secondary:  var(--neutral-600);
+  --text-on-brand:   #FFFFFF;
+
+  /* Borders */
+  --border-token:    var(--neutral-400);
+  --border-strong:   var(--neutral-500);
+
+  /* Semantic surfaces */
+  --error:           var(--danger);
+  --success-color:   var(--success);
+  --warning-color:   var(--warning);
+  --success-bg:      rgba(22,163,74,0.10);
+  --warning-bg:      rgba(245,158,11,0.12);
+  --error-bg:        rgba(220,38,38,0.10);
+  --info-bg:         rgba(14,165,255,0.10);
+
+  /* Accent soft */
+  --accent-soft:     var(--brand-50);
+
+  /* Spacing — 8px base grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii */
+  --radius-card:   14px;
+  --radius-btn:    10px;
+  --radius-input:  10px;
+  --radius-badge:  100px;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Motion */
+  --motion-fast:   120ms;
+  --motion-mid:    240ms;
+  --motion-spring: cubic-bezier(.2,.9,.25,1);
+
+  /* Shadows */
+  --shadow-card:       0 2px 10px rgba(15,23,42,0.04);
+  --shadow-card-hover: 0 8px 24px rgba(15,23,42,0.06);
+  --shadow-btn:        0 1px 2px rgba(0,51,160,0.18);
+  --shadow-focus:      0 0 0 3px rgba(127,177,255,0.35);
+  --shadow-dropdown:   0 10px 30px rgba(15,23,42,0.08);
+  --shadow-sidebar:    4px 0 24px rgba(0,36,122,0.18);
+}
+
+/* ─── 4. Primitive tokens — Dark overrides ───────────────────── */
+[data-theme="dark"], .dark {
+  --neutral-100: #0B1220;
+  --neutral-200: #0F172A;
+  --neutral-300: #111827;
+  --neutral-400: #1E293B;
+  --neutral-500: #263449;
+  --neutral-600: #94A3B8;
+
+  /* Surfaces */
+  --bg:              var(--neutral-100);
+  --bg-surface:      var(--neutral-200);
+  --sidebar-bg:      #060D1A;
+  --card-bg:         var(--neutral-300);
+  --header-bg:       var(--neutral-300);
+
+  /* Brand on dark */
+  --brand-hover:     var(--brand-500);
+  --brand-light:     var(--brand-400);
+  --brand-tint:      var(--brand-300);
+  --brand-soft:      rgba(77,147,255,0.15);
+  --brand-contrast:  #FFFFFF;
+
+  /* Text */
+  --text-primary:    #F8FAFC;
+  --text-secondary:  var(--neutral-600);
+  --text-on-brand:   #FFFFFF;
+
+  /* Borders */
+  --border-token:    var(--neutral-400);
+  --border-strong:   var(--neutral-500);
+
+  /* Semantic */
+  --error:           #F87171;
+  --accent-soft:     rgba(77,147,255,0.15);
+  --success-bg:      rgba(22,163,74,0.15);
+  --warning-bg:      rgba(245,158,11,0.15);
+  --error-bg:        rgba(220,38,38,0.15);
+  --info-bg:         rgba(14,165,255,0.15);
+
+  /* Shadows */
+  --shadow-card:       0 1px 4px rgba(0,0,0,0.40);
+  --shadow-card-hover: 0 6px 20px rgba(0,0,0,0.50);
+  --shadow-dropdown:   0 8px 30px rgba(0,0,0,0.55);
+  --shadow-sidebar:    4px 0 24px rgba(0,0,0,0.40);
+}
+
+/* ─── 5. Shadcn HSL tokens ───────────────────────────────────── */
+@layer base {
+  :root {
+    --background: 220 100% 99%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 222 100% 31%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 30% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 20% 94%;
+    --muted-foreground: 220 16% 65%;
+    --accent: 214 100% 57%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 73% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 216 20% 90%;
+    --input: 216 20% 90%;
+    --ring: 222 100% 31%;
+    --chart-1: 222 100% 31%;
+    --chart-2: 214 100% 57%;
+    --chart-3: 175 84% 35%;
+    --chart-4: 38 93% 49%;
+    --chart-5: 0 73% 50%;
+    --radius: 0.625rem;
+    --sidebar-background: 222 100% 31%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 214 100% 57%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 80% 38%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 222 60% 38%;
+    --sidebar-ring: 214 100% 57%;
+  }
+
+  .dark {
+    --background: 222 47% 9%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 214 100% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 40% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 40% 14%;
+    --muted-foreground: 215 20% 60%;
+    --accent: 214 100% 64%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 40% 18%;
+    --input: 222 40% 18%;
+    --ring: 214 100% 64%;
+    --chart-1: 214 100% 64%;
+    --chart-2: 175 84% 45%;
+    --chart-3: 38 93% 57%;
+    --chart-4: 280 55% 60%;
+    --chart-5: 0 73% 55%;
+    --sidebar-background: 222 55% 6%;
+    --sidebar-foreground: 215 30% 80%;
+    --sidebar-primary: 214 100% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 45% 12%;
+    --sidebar-accent-foreground: 215 30% 80%;
+    --sidebar-border: 222 40% 16%;
+    --sidebar-ring: 214 100% 64%;
+  }
+}
+
+/* ─── 6. Base resets ─────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.006em;
+    overscroll-behavior: none;
+  }
+
+  button, a, [role="button"],
+  nav, [data-radix-collection-item] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Mobile touch-target minimums */
+  @media (max-width: 1023px) {
+    button:not([data-size="icon"]),
+    [data-radix-select-trigger] {
+      min-height: 44px;
+    }
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    color: var(--text-primary);
+  }
+
+  h3 {
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    color: var(--text-primary);
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  input, select, textarea, button {
+    font-family: var(--font-sans) !important;
+  }
+}
+
+/* ─── 7. Component layer (gs-* classes) ──────────────────────── */
+@layer components {
+
+  /* Page container */
+  .gs-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-8);
+  }
+
+  @media (max-width: 768px) {
+    .gs-page { padding: var(--space-4); }
+  }
+
+  /* Cards */
+  .gs-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-token);
+    transition: box-shadow var(--motion-mid) var(--motion-spring),
+                transform var(--motion-mid) var(--motion-spring);
+  }
+
+  .gs-card:hover { box-shadow: var(--shadow-card-hover); }
+
+  .gs-card--interactive:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* KPI / Stat cards */
+  .gs-stat-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-token);
+  }
+
+  /* Primary button */
+  .gs-btn--primary {
+    background-color: var(--brand);
+    color: var(--brand-contrast);
+    border-radius: var(--radius-btn);
+    padding: 10px var(--space-4);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    box-shadow: var(--shadow-btn);
+    transition: background-color var(--motion-fast) ease,
+                box-shadow var(--motion-fast) ease,
+                transform var(--motion-fast) ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .gs-btn--primary:hover {
+    background-color: var(--brand-hover);
+    box-shadow: 0 4px 14px rgba(0,51,160,0.28);
+    transform: translateY(-1px);
+  }
+
+  .gs-btn--primary:active        { transform: scale(0.98); }
+  .gs-btn--primary:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+  .gs-btn--primary:disabled      { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* Secondary button */
+  .gs-btn--secondary {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-token);
+    border-radius: var(--radius-btn);
+    padding: 10px var(--space-4);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color var(--motion-fast) ease,
+                border-color var(--motion-fast) ease,
+                transform var(--motion-fast) ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .gs-btn--secondary:hover {
+    background-color: var(--brand-50);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+
+  .gs-btn--secondary:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+  /* Form inputs */
+  .gs-input {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: var(--radius-input);
+    border: 1px solid var(--border-token);
+    background: var(--card-bg);
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    transition: border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+    width: 100%;
+  }
+
+  .gs-input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: var(--shadow-focus);
+  }
+
+  .gs-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+  .gs-input.error        { border-color: var(--error); }
+
+  .gs-label {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Table */
+  .gs-table              { width: 100%; border-collapse: collapse; }
+  .gs-table thead tr     { border-bottom: 1px solid var(--border-token); }
+
+  .gs-table thead th {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .gs-table tbody tr {
+    border-bottom: 1px solid var(--border-token);
+    transition: background-color var(--motion-fast) ease;
+  }
+
+  .gs-table tbody tr:hover       { background-color: var(--brand-50); }
+  .gs-table tbody tr:last-child  { border-bottom: none; }
+
+  .gs-table tbody td {
+    padding: 13px 16px;
+    font-size: 14px;
+    color: var(--text-primary);
+    vertical-align: middle;
+  }
+
+  /* Badges */
+  .gs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: var(--radius-badge);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+
+  .gs-badge--brand   { background: var(--brand-soft);       color: var(--brand); }
+  .gs-badge--accent  { background: rgba(14,165,164,0.12);   color: var(--accent-teal); }
+  .gs-badge--success { background: var(--success-bg);       color: var(--success); }
+  .gs-badge--warning { background: var(--warning-bg);       color: #B45309; }
+  .gs-badge--error   { background: var(--error-bg);         color: var(--error); }
+  .gs-badge--neutral { background: rgba(148,160,180,0.12);  color: var(--text-secondary); }
+
+  /* Section headers */
+  .gs-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    line-height: 28px;
+  }
+
+  .gs-section-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Modal overlay */
+  .gs-modal-overlay {
+    background-color: rgba(11,18,32,0.45);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Dividers */
+  .gs-divider {
+    border: none;
+    border-top: 1px solid var(--border-token);
+    margin: var(--space-6) 0;
+  }
+
+  /* Sidebar active nav */
+  .gs-nav-active {
+    background-color: #4D93FF;
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+
+  /* Toast */
+  .gs-toast {
+    border-radius: var(--radius-btn);
+    box-shadow: var(--shadow-dropdown);
+    font-size: 14px;
+    padding: 12px var(--space-4);
+    background: var(--card-bg);
+    border: 1px solid var(--border-token);
+    color: var(--text-primary);
+    animation: slideInTop var(--motion-mid) var(--motion-spring);
+  }
+
+  @keyframes slideInTop {
+    from { transform: translateY(-10px); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+}
+
+/* ─── 8. Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 5px; height: 5px; }
+::-webkit-scrollbar-track        { background: transparent; }
+::-webkit-scrollbar-thumb        { background: rgba(0,51,160,0.18); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover  { background: rgba(0,51,160,0.32); }
+
+/* ─── 9. Print styles ────────────────────────────────────────── */
+@media print {
+  body { font-family: var(--font-sans); font-size: 11pt; color: #000; background: #fff; }
+  .no-print { display: none !important; }
+  .gs-card, .gs-stat-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+}
